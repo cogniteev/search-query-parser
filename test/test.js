@@ -559,4 +559,17 @@ describe('Search query syntax parser', function () {
       offsetEnd: 47
     }]);
   });
+
+  it('should correctly parse keyword without value', function() {
+      var searchQuery = 'from:';
+      var options = {
+          keywords: ['from']
+      };
+      var parsedSearchQuery = searchquery.parse(searchQuery, options);
+
+      parsedSearchQuery.should.be.an.Object;
+      parsedSearchQuery.facets.should.be.an.Object;
+      parsedSearchQuery.facets.from.should.containEql('');
+      parsedSearchQuery.should.not.have.property('fulltext');
+  })
 });
