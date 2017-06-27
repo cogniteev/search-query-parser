@@ -20,7 +20,7 @@ And turns it into an object like this:
     from: '1/10/2013',
     to: '15/04/2014'
     },
-  text: 'photos',
+  fulltext: 'photos',
   offsets: 
    [ { keyword: 'from', value: 'hi@retrace.io,foo@gmail.com', offsetStart: 0, offsetEnd: 32 },
      { keyword: 'to', value: 'me', offsetStart: 33, offsetEnd: 38 },
@@ -49,7 +49,7 @@ var searchQueryObj = searchQuery.parse(query, options);
 // searchQueryObj.from is now ['hi@retrace.io', 'foo@gmail.com']
 // searchQueryObj.to is now 'me'
 // searchQueryObj.date is now {from: '1/10/2013', to: '15/04/2014'}
-// searchQueryObj.text is now 'photos'
+// searchQueryObj.fulltext is now 'photos'
 ```
 
 You can configure what keywords and ranges the parser should accept with the options argument.
@@ -58,20 +58,6 @@ It accepts 2 values:
 * `ranges`, that can be separated by a hyphen (-)
 
 Both values take an array of strings, as in the example just above.
-
-If no keywords or ranges are specified, or if none are present in the given search query, then `searchQuery.parse` will return a string.
-
-```javascript
-var searchQuery = require('search-query-parser');
-
-var query = 'a query with just text';
-var parsedQuery = searchQuery.parse(query);
-// parsedQuery is now 'a query with just text'
-
-var options = {keywords: ['unused']};
-var parsedQueryWithOptions = searchQuery.parse(query, options);
-// parsedQueryWithOptions is now 'a query with just text'
-```
 
 You can also use exclusion syntax, like `-from:sep@foobar.io name:hello,world` . And it will return :
 
