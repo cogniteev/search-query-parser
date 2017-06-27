@@ -22,7 +22,7 @@ describe('Search query syntax parser', function () {
 
     parsedSearchQuery.should.be.an.Object;
     parsedSearchQuery.should.have.property('from', 'jul@foo.com');
-    parsedSearchQuery.should.not.have.property('text');
+    parsedSearchQuery.should.not.have.property('fulltext');
     parsedSearchQuery.should.have.property('offsets', [{
       keyword: 'from',
       value: 'jul@foo.com',
@@ -39,7 +39,7 @@ describe('Search query syntax parser', function () {
 
     parsedSearchQuery.should.be.an.Object;
     parsedSearchQuery.should.have.property('from', 'jul@foo.com');
-    parsedSearchQuery.should.have.property('text', 'hey buddy!');
+    parsedSearchQuery.should.have.property('fulltext', 'hey buddy!');
     parsedSearchQuery.should.have.property('offsets', [{
       keyword: 'from',
       value: 'jul@foo.com',
@@ -66,7 +66,7 @@ describe('Search query syntax parser', function () {
 
     parsedSearchQuery.should.be.an.Object;
     parsedSearchQuery.should.have.not.have.property('other');
-    parsedSearchQuery.should.have.property('text', 'test another other:jul@foo.com');
+    parsedSearchQuery.should.have.property('fulltext', 'test another other:jul@foo.com');
     parsedSearchQuery.should.have.property('offsets', [{
       text: 'test',
       offsetStart: 0,
@@ -90,7 +90,7 @@ describe('Search query syntax parser', function () {
 
     parsedSearchQuery.should.be.an.Object;
     parsedSearchQuery.should.have.property('from', 'jul@foo.com');
-    parsedSearchQuery.should.have.property('text', 'hey you!');
+    parsedSearchQuery.should.have.property('fulltext', 'hey you!');
     parsedSearchQuery.should.have.property('offsets', [{
       text: 'hey',
       offsetStart: 0,
@@ -115,7 +115,7 @@ describe('Search query syntax parser', function () {
 
     parsedSearchQuery.should.be.an.Object;
     parsedSearchQuery.should.have.property('from', 'jul@foo.com');
-    parsedSearchQuery.should.have.property('text', 'hey you! pouet');
+    parsedSearchQuery.should.have.property('fulltext', 'hey you! pouet');
     parsedSearchQuery.should.have.property('offsets', [{
       text: 'hey',
       offsetStart: 0,
@@ -145,7 +145,7 @@ describe('Search query syntax parser', function () {
 
     parsedSearchQuery.should.be.an.Object;
     parsedSearchQuery.should.have.property('from', 'jul@foo.com');
-    parsedSearchQuery.should.have.property('text', 'hey you! pouet');
+    parsedSearchQuery.should.have.property('fulltext', 'hey you! pouet');
     parsedSearchQuery.should.have.property('offsets', [{
       text: 'hey',
       offsetStart: 3,
@@ -175,7 +175,7 @@ describe('Search query syntax parser', function () {
     parsedSearchQuery.should.be.an.Object;
     parsedSearchQuery.should.have.property('from', 'jul@foo.com');
     parsedSearchQuery.should.have.property('to', 'bar@hey.ya');
-    parsedSearchQuery.should.have.property('text', 'hey, so what\'s up gents');
+    parsedSearchQuery.should.have.property('fulltext', 'hey, so what\'s up gents');
     parsedSearchQuery.should.have.property('offsets', [{
       text: 'hey,',
       offsetStart: 0,
@@ -217,7 +217,7 @@ describe('Search query syntax parser', function () {
 
     parsedSearchQuery.should.be.an.Object;
     parsedSearchQuery.should.have.property('from');
-    parsedSearchQuery.should.have.property('text', 'vaccationessss');
+    parsedSearchQuery.should.have.property('fulltext', 'vaccationessss');
     parsedSearchQuery.from.should.be.an.Array;
     parsedSearchQuery.from.length.should.equal(2);
     parsedSearchQuery.from.should.containEql('jul@foo.com');
@@ -266,7 +266,7 @@ describe('Search query syntax parser', function () {
     var parsedSearchQuery = searchquery.parse(searchQuery, options);
 
     parsedSearchQuery.should.be.an.Object;
-    parsedSearchQuery.should.have.property('text', 'ouch!#');
+    parsedSearchQuery.should.have.property('fulltext', 'ouch!#');
     parsedSearchQuery.should.have.property('from');
     parsedSearchQuery.from.should.be.an.Array;
     parsedSearchQuery.from.length.should.equal(4);
@@ -298,7 +298,7 @@ describe('Search query syntax parser', function () {
     var parsedSearchQuery = searchquery.parse(searchQuery, options);
 
     parsedSearchQuery.should.be.an.Object;
-    parsedSearchQuery.should.have.property('text', 'ahaha');
+    parsedSearchQuery.should.have.property('fulltext', 'ahaha');
     parsedSearchQuery.should.have.property('date');
     parsedSearchQuery.date.should.be.an.Object;
     parsedSearchQuery.date.from.should.containEql('12/12/2012');
@@ -320,7 +320,7 @@ describe('Search query syntax parser', function () {
     var parsedSearchQuery = searchquery.parse(searchQuery, options);
 
     parsedSearchQuery.should.be.an.Object;
-    parsedSearchQuery.should.have.property('text', 'ahaha');
+    parsedSearchQuery.should.have.property('fulltext', 'ahaha');
     parsedSearchQuery.should.have.property('date');
     parsedSearchQuery.date.should.be.an.Object;
     parsedSearchQuery.date.from.should.containEql('12/12/2012');
@@ -353,7 +353,7 @@ describe('Search query syntax parser', function () {
     var parsedSearchQuery = searchquery.parse(searchQuery, options);
 
     parsedSearchQuery.should.be.an.Object;
-    parsedSearchQuery.should.have.property('text', '✓ about 这个事儿');
+    parsedSearchQuery.should.have.property('fulltext', '✓ about 这个事儿');
     parsedSearchQuery.should.have.property('from', 'dr@who.co.uk');
   });
 
@@ -364,7 +364,7 @@ describe('Search query syntax parser', function () {
     var parsedSearchQuery = searchquery.parse(searchQuery, options);
 
     parsedSearchQuery.should.be.an.Object;
-    parsedSearchQuery.should.have.property('text', 'ahaha ouch!# about that');
+    parsedSearchQuery.should.have.property('fulltext', 'ahaha ouch!# about that');
     parsedSearchQuery.should.have.property('date');
     parsedSearchQuery.date.should.be.an.Object;
     parsedSearchQuery.date.from.should.containEql('12/12/2012');
@@ -478,7 +478,7 @@ describe('Search query syntax parser', function () {
     parsedSearchQuery.should.be.an.Object;
     parsedSearchQuery.exclude.should.be.an.Object;
     parsedSearchQuery.exclude.should.have.property('from', 'jul@foo.com');
-    parsedSearchQuery.should.not.have.property('text');
+    parsedSearchQuery.should.not.have.property('fulltext');
     parsedSearchQuery.should.have.property('offsets', [{
       keyword: 'from',
       value: 'jul@foo.com',
@@ -496,7 +496,7 @@ describe('Search query syntax parser', function () {
     parsedSearchQuery.exclude.should.be.an.Object;
     parsedSearchQuery.exclude.from.should.containEql('jul@foo.com');
     parsedSearchQuery.exclude.from.should.containEql('mar@foo.com');
-    parsedSearchQuery.should.not.have.property('text');
+    parsedSearchQuery.should.not.have.property('fulltext');
     parsedSearchQuery.should.have.property('offsets', [{
       keyword: 'from',
       value: 'jul@foo.com,mar@foo.com',
@@ -517,7 +517,7 @@ describe('Search query syntax parser', function () {
     parsedSearchQuery.exclude.from.should.containEql('jul@foo.com');
     parsedSearchQuery.exclude.from.should.containEql('mar@foo.com');
     parsedSearchQuery.exclude.from.should.containEql('jan@foo.com');
-    parsedSearchQuery.should.not.have.property('text');
+    parsedSearchQuery.should.not.have.property('fulltext');
     parsedSearchQuery.should.have.property('offsets', [{
       keyword: 'from',
       value: 'jul@foo.com,mar@foo.com',
