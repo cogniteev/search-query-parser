@@ -13,20 +13,23 @@ And turns it into an object like this:
 
 ```javascript
 {
-  from: ['hi@retrace.io', 'foo@gmail.com'],
-  to: 'me',
-  subject: 'vacations',
-  date: {
-    from: '1/10/2013',
-    to: '15/04/2014'
-    },
   fulltext: 'photos',
-  offsets: 
-   [ { keyword: 'from', value: 'hi@retrace.io,foo@gmail.com', offsetStart: 0, offsetEnd: 32 },
-     { keyword: 'to', value: 'me', offsetStart: 33, offsetEnd: 38 },
-     { keyword: 'subject', value: 'vacations', offsetStart: 39, offsetEnd: 56 },
-     { keyword: 'date', value: '1/10/2013-15/04/2014', offsetStart: 57, offsetEnd: 82 },
-     { text: 'photos', offsetStart: 83, offsetEnd: 89 } ]
+  facets: {
+    from: ['hi@retrace.io', 'foo@gmail.com'],
+    to: 'me',
+    subject: 'vacations',
+    date: {
+        from: '1/10/2013',
+        to: '15/04/2014'
+    }
+  },
+  offsets: [
+    { keyword: 'from', value: 'hi@retrace.io,foo@gmail.com', offsetStart: 0, offsetEnd: 32 },
+    { keyword: 'to', value: 'me', offsetStart: 33, offsetEnd: 38 },
+    { keyword: 'subject', value: 'vacations', offsetStart: 39, offsetEnd: 56 },
+    { keyword: 'date', value: '1/10/2013-15/04/2014', offsetStart: 57, offsetEnd: 82 },
+    { text: 'photos', offsetStart: 83, offsetEnd: 89 }
+  ]
 }
 ```
 
@@ -46,9 +49,9 @@ var options = {keywords: ['from', 'to', 'subject'], ranges: ['date']}
 
 var searchQueryObj = searchQuery.parse(query, options);
 
-// searchQueryObj.from is now ['hi@retrace.io', 'foo@gmail.com']
-// searchQueryObj.to is now 'me'
-// searchQueryObj.date is now {from: '1/10/2013', to: '15/04/2014'}
+// searchQueryObj.facets.from is now ['hi@retrace.io', 'foo@gmail.com']
+// searchQueryObj.facets.to is now 'me'
+// searchQueryObj.facets.date is now {from: '1/10/2013', to: '15/04/2014'}
 // searchQueryObj.fulltext is now 'photos'
 ```
 
@@ -63,7 +66,9 @@ You can also use exclusion syntax, like `-from:sep@foobar.io name:hello,world` .
 
 ```javascript
 {
-  name: ['hello', 'world'],
+  facets: {
+    name: ['hello', 'world']
+  },
   excludedFacets: {
     from: ['sep@foobar.io']
   }
