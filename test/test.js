@@ -5,6 +5,12 @@ var assert = require('assert')
 
 describe('Search query syntax parser', function () {
 
+  it('should return an object with empty fulltext if empty', function () {
+      var parsedSearchQuery = searchquery.parse();
+
+      parsedSearchQuery.should.be.an.Object;
+      parsedSearchQuery.should.have.property('fulltext', '');
+  });
 
   it('should return an object when zero keyword present', function () {
     var searchQuery = "fancy pyjama wear";
