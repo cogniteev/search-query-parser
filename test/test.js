@@ -476,8 +476,8 @@ describe('Search query syntax parser', function () {
     var parsedSearchQuery = searchquery.parse(searchQuery, options);
 
     parsedSearchQuery.should.be.an.Object;
-    parsedSearchQuery.exclude.should.be.an.Object;
-    parsedSearchQuery.exclude.should.have.property('from', 'jul@foo.com');
+    parsedSearchQuery.excludedFacets.should.be.an.Object;
+    parsedSearchQuery.excludedFacets.should.have.property('from', 'jul@foo.com');
     parsedSearchQuery.should.not.have.property('fulltext');
     parsedSearchQuery.should.have.property('offsets', [{
       keyword: 'from',
@@ -493,9 +493,9 @@ describe('Search query syntax parser', function () {
     var parsedSearchQuery = searchquery.parse(searchQuery, options);
 
     parsedSearchQuery.should.be.an.Object;
-    parsedSearchQuery.exclude.should.be.an.Object;
-    parsedSearchQuery.exclude.from.should.containEql('jul@foo.com');
-    parsedSearchQuery.exclude.from.should.containEql('mar@foo.com');
+    parsedSearchQuery.excludedFacets.should.be.an.Object;
+    parsedSearchQuery.excludedFacets.from.should.containEql('jul@foo.com');
+    parsedSearchQuery.excludedFacets.from.should.containEql('mar@foo.com');
     parsedSearchQuery.should.not.have.property('fulltext');
     parsedSearchQuery.should.have.property('offsets', [{
       keyword: 'from',
@@ -513,10 +513,10 @@ describe('Search query syntax parser', function () {
     var parsedSearchQuery = searchquery.parse(searchQuery, options);
 
     parsedSearchQuery.should.be.an.Object;
-    parsedSearchQuery.exclude.should.be.an.Object;
-    parsedSearchQuery.exclude.from.should.containEql('jul@foo.com');
-    parsedSearchQuery.exclude.from.should.containEql('mar@foo.com');
-    parsedSearchQuery.exclude.from.should.containEql('jan@foo.com');
+    parsedSearchQuery.excludedFacets.should.be.an.Object;
+    parsedSearchQuery.excludedFacets.from.should.containEql('jul@foo.com');
+    parsedSearchQuery.excludedFacets.from.should.containEql('mar@foo.com');
+    parsedSearchQuery.excludedFacets.from.should.containEql('jan@foo.com');
     parsedSearchQuery.should.not.have.property('fulltext');
     parsedSearchQuery.should.have.property('offsets', [{
       keyword: 'from',

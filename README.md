@@ -64,7 +64,7 @@ You can also use exclusion syntax, like `-from:sep@foobar.io name:hello,world` .
 ```javascript
 {
   name: ['hello', 'world'],
-  exclude: {
+  excludedFacets: {
     from: ['sep@foobar.io']
   }
 }
