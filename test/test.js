@@ -20,6 +20,13 @@ describe('Search query syntax parser', function () {
     parsedSearchQuery.should.have.property('fulltext', 'fancy pyjama wear');
   });
 
+  it('should trim fulltext', function () {
+      var searchQuery = " fancy pyjama wear ";
+      var parsedSearchQuery = searchquery.parse(searchQuery);
+
+      parsedSearchQuery.should.be.an.Object;
+      parsedSearchQuery.should.have.property('fulltext', 'fancy pyjama wear');
+  });
 
   it('should parse a single keyword with no text', function () {
     var searchQuery = 'from:jul@foo.com';
