@@ -6,12 +6,12 @@ var assert = require('assert')
 describe('Search query syntax parser', function () {
 
 
-  it('should return a simple string when zero keyword present', function () {
+  it('should return an object when zero keyword present', function () {
     var searchQuery = "fancy pyjama wear";
     var parsedSearchQuery = searchquery.parse(searchQuery);
 
-    parsedSearchQuery.should.be.a.string;
-    parsedSearchQuery.should.equal(searchQuery);
+    parsedSearchQuery.should.be.an.Object;
+    parsedSearchQuery.should.have.property('fulltext', 'fancy pyjama wear');
   });
 
 
@@ -342,8 +342,8 @@ describe('Search query syntax parser', function () {
     var searchQuery = '✓ about 这个事儿';
     var parsedSearchQuery = searchquery.parse(searchQuery);
 
-    parsedSearchQuery.should.be.a.string;
-    parsedSearchQuery.should.be.equal('✓ about 这个事儿');
+    parsedSearchQuery.should.be.an.Object;
+    parsedSearchQuery.should.have.property('fulltext', '✓ about 这个事儿');
   });
 
 
